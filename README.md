@@ -5,7 +5,7 @@ Veja o que o agente Snake tem a lhe dizer.
 
 ## Sneak peek
 <details>
-<img src="https://github.com/ItaloAlb/surprise/blob/main/sneakpeek/GIF.gif">
+<img src="https://github.com/ItaloAlb/surprise/blob/main/sneakpeek/GIF.gif" alt="">
 </details>
 
 
