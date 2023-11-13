@@ -32,8 +32,6 @@ def main():
                 record = score
                 agent.model.save()
 
-            print('Game:', game.game_count, 'Score:', score, 'Record:', record)
-
 
 if __name__ == '__main__':
     main()
