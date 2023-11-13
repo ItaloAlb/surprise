@@ -15,4 +15,4 @@ Veja o que o agente Snake tem a lhe dizer.
 
 ## Agradecimentos
 
-Agradecimentos especiais a mrkarenpro por me aguentar. :)
+Agradecimentos especiais a mrkarenpro por me aguentar. Feliz aniversário :)
