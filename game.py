@@ -21,26 +21,10 @@ class Game:
         self._BACKGROUND_COLOR = "white"
         self._SNAKE_COLOR = (0, 201, 87)  # emerald green
         self._SNAKE_SEC_COLOR = "black"
+        self._HOLE_COLOR = "darkred"
         self._FOOD_COLOR = "red"
 
-        self._FOOD_POSITIONS = [
-            [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [1, 3], [2, 3], [3, 3], [4, 0], [4, 1], [4, 2],
-            [4, 3], [4, 4], [4, 5], [4, 6],  # H
-            [7, 2], [8, 2], [9, 3], [7, 4], [8, 4], [9, 4], [6, 5], [9, 5], [7, 6], [8, 6], [9, 6],  # a
-            [11, 2], [11, 3], [11, 4], [11, 5], [11, 6], [11, 7], [11, 8], [12, 2], [13, 2], [12, 6], [13, 6], [14, 3],
-            [14, 4], [14, 5],  # p
-            [16, 2], [16, 3], [16, 4], [16, 5], [16, 6], [16, 7], [16, 8], [17, 2], [18, 2], [17, 6], [18, 6], [19, 3],
-            [19, 4], [19, 5],  # p
-            [21, 2], [21, 3], [21, 4], [21, 5], [22, 6], [23, 6], [22, 8], [23, 8], [24, 2], [24, 3], [24, 4], [24, 5],
-            [24, 6], [24, 7],  # y
-            [28, 0], [28, 1], [28, 2], [28, 3], [28, 4], [28, 5], [28, 6], [29, 0], [30, 0], [31, 0], [29, 3], [30, 3],
-            [31, 3], [29, 6], [30, 6], [31, 6], [32, 1], [32, 2], [32, 4], [32, 5],  # B
-            [34, 0], [34, 1], [34, 2], [34, 3], [34, 4], [34, 5], [34, 6], [35, 0], [36, 0], [35, 6], [36, 6], [37, 1],
-            [37, 5], [38, 2], [38, 3], [38, 4],  # D
-            [41, 2], [42, 2], [43, 3], [41, 4], [42, 4], [43, 4], [40, 5], [43, 5], [41, 6], [42, 6], [43, 6],  # a
-            [45, 2], [45, 3], [45, 4], [45, 5], [46, 6], [47, 6], [46, 8], [47, 8], [48, 2], [48, 3], [48, 4], [48, 5],
-            [48, 6], [48, 7]  # y
-        ]
+        self._FOOD_POSITIONS = []
 
         self._SNAKE_SIZE = 3
 
@@ -57,6 +41,7 @@ class Game:
         self.snake = []
         self.food = ()
         self.hole = []
+        self.done = False
         self.direction = Direction.LEFT
 
         self.reset()
@@ -105,6 +90,8 @@ class Game:
         self.iteration = 0
 
         self.hole = []
+
+        self.done = False
 
         self.snake = []
         for i in range(self._SNAKE_SIZE):
@@ -244,6 +231,7 @@ class Game:
             pos = self._FOOD_POSITIONS.pop(index)
             self.food = (pos[0] * self._CELL_SIZE + 60, pos[1] * self._CELL_SIZE + 160)
         else:
+            self.done = True
             self._update_window_name("Surprise!")
             self.food = (randrange(0, self._WINDOW_WIDTH, 10), randrange(0, self._WINDOW_HEIGHT, 10))
 
@@ -258,7 +246,8 @@ class Game:
         elif self._check_food_collision(head):
             has_food_collision = True
             self.score += 1
-            self.hole.append(self.food)
+            if not self.done:
+                self.hole.append(self.food)
             self._generate_food()
             self._update_snake_head()
         return has_deadly_collision, has_food_collision
@@ -290,10 +279,8 @@ class Game:
                              2)
 
         for i in range(len(self.hole)):
-            hole_color = "darkred"
-
             pygame.draw.rect(self.screen,
-                             hole_color,
+                             self._HOLE_COLOR,
                              (self.hole[i], self._GRID_SIZE),
                              5,
                              2)
