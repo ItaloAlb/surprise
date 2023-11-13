@@ -4,7 +4,7 @@ from collections import deque
 from model import LinearQNet, QTrainer
 
 MAX_MEMORY = 100_000
-BATCH_SIZE = 500
+BATCH_SIZE = 1000
 LR = 0.0005
 
 
