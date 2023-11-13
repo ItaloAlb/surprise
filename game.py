@@ -290,7 +290,8 @@ class Game:
                              2)
 
         for i in range(len(self.hole)):
-            hole_color = (randrange(0, 256), randrange(0, 256), randrange(0, 256))
+            # hole_color = (randrange(0, 256), randrange(0, 256), randrange(0, 256))
+            hole_color = "darkred"
 
             pygame.draw.rect(self.screen,
                              hole_color,
